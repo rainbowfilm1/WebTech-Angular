@@ -1,0 +1,28 @@
+Index.html
+<!doctype html>
+<html lang="en"><head>
+<meta charset="UTF-8"> 
+<title>Example - example-ng-style-production</title>
+<link href="style.css" rel="stylesheet" type="text/css">
+<script src="//code.angularjs.org/snapshot/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
+</head>
+<body ng-app="">
+<input type="button" value="set color" ng-click="myStyle={color:'red'}">
+<input type="button" value="set background" ng-click="myStyle={'backgroundcolor':'blue'}">
+<input type="button" value="clear" ng-click="myStyle={}"><br/>
+<span ng-style="myStyle">Sample Text</span>
+<pre>myStyle={{myStyle}}</pre></body></html>
+
+
+Protractor.js
+var colorSpan = element(by.css('span'));
+it('should check ng-style', function() {
+expect(colorSpan.getCssValue('color')).toMatch(/rgba\(0, 0, 0, 1\)|rgb\(0, 0, 0\)/);
+element(by.css('input[value=\'set color\']')).click();
+expect(colorSpan.getCssValue('color')).toMatch(/rgba\(255, 0, 0, 1\)|rgb\(255, 0, 0\)/);
+element(by.css('input[value=clear]')).click();
+expect(colorSpan.getCssValue('color')).toMatch(/rgba\(0, 0, 0, 1\)|rgb\(0,0, 0\)/); })
+
+Style.css
+span { color: black;}
